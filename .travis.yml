@@ -1,6 +1,5 @@
 language: cpp
 before_script:
-  - sudo apt-get install -qq g++-6 -y
   - sudo apt-get install libboost-test-dev -y
 script:
   - cmake .
