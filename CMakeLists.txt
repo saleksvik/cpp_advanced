@@ -2,16 +2,17 @@ cmake_minimum_required(VERSION 3.2)
 
 project(helloworld VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
+set (HW ./hw02)
 set (TESTS_SOURCES
-        ./tests/test_main.cpp)
+        ./${HW}/tests/test_main.cpp)
 
 find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
-configure_file(version.h.in version.h)
+configure_file(./${HW}/version.h.in ./${HW}/version.h)
 
-add_executable(hw01_helloworld main.cpp)
+add_executable(hw01_helloworld ./${HW}/main.cpp)
 
-add_library(lib_helloworld lib_helloworld.cpp)
+add_library(lib_helloworld ./${HW}/lib_helloworld.cpp)
 
 set (TEST test_helloworld)
 add_executable (${TEST} ${TESTS_SOURCES})
