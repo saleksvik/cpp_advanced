@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 
-project(ip_filter VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+project(ipfilter03 VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
 set (HW ./hw03)
 set (TESTS_SOURCES
