@@ -5,7 +5,6 @@
 #include <vector>
 
 #include <algorithm>
-#include <fstream>
 
 #include "ip_filter_li.h"
 
@@ -20,18 +19,9 @@ int main(int argc, char const *argv[])
 {
     try
     {
-#ifndef ONLINE_JUDGE
-        std::fstream ifs("./ip_filter.tsv", std::ifstream::in);
-        if(!ifs.is_open())
-        {
-            std::cout << "File not opened" << "\n";
-            return -1;
-        }
-#endif
         std::vector<std::vector<std::string> > ip_pool;
 
-        //for(std::string line; std::getline(std::cin, line);)
-        for(std::string line; std::getline(ifs, line);)
+        for(std::string line; std::getline(std::cin, line);)
         {
             std::vector<std::string> v = split(line, '\t');
             ip_pool.push_back(split(v.at(0), '.'));
