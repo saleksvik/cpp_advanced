@@ -47,4 +47,4 @@ include (CPack)
 
 enable_testing()
 
-add_test(${TEST} ${TEST})
+add_test(test_reversed_sort ${TEST})
