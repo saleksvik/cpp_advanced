@@ -4,13 +4,13 @@ project(hw03_ip_filter VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
 set (HW ./hw03)
 set (TESTS_SOURCES
-        ./${HW}/tests/test_ip_filter.cpp)
+        ${HW}/tests/test_ip_filter.cpp)
 
 find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
-add_executable(hw03_ip_filter ./${HW}/ip_filter.cpp)
+add_executable(hw03_ip_filter ${HW}/ip_filter.cpp)
 
-add_library(ip_filter_li ./${HW}/ip_filter_li.cpp)
+add_library(ip_filter_li ${HW}/ip_filter_li.cpp)
 
 set (TEST test_ip_filter)
 add_executable (${TEST} ${TESTS_SOURCES})
