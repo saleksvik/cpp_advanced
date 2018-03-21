@@ -1,23 +1,21 @@
 cmake_minimum_required(VERSION 3.2)
 
-project(helloworld VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+project(ip_filter VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
-set (HW ./hw02)
+set (HW ./hw03)
 set (TESTS_SOURCES
-        ./${HW}/tests/test_main.cpp)
+        ${HW}/tests/test_ip_filter.cpp)
 
 find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
-configure_file(./${HW}/version.h.in ./${HW}/version.h)
+add_executable(hw03_ip_filter ${HW}/ip_filter.cpp)
 
-add_executable(hw01_helloworld ./${HW}/main.cpp)
+add_library(ip_filter_li ${HW}/ip_filter_li.cpp)
 
-add_library(lib_helloworld ./${HW}/lib_helloworld.cpp)
-
-set (TEST test_helloworld)
+set (TEST test_ip_filter)
 add_executable (${TEST} ${TESTS_SOURCES})
 
-set_target_properties(hw01_helloworld ${TEST} PROPERTIES
+set_target_properties(hw03_ip_filter  ${TEST} PROPERTIES
         CXX_STANDARD 14
         CXX_STANDARD_REQUIRED ON
         COMPILE_OPTIONS -Wpedantic -Wall -Wextra
@@ -26,16 +24,16 @@ set_target_properties(hw01_helloworld ${TEST} PROPERTIES
 set_target_properties(${TEST} PROPERTIES
         COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
         INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
-        )
+       )
 
 target_link_libraries(${TEST}
         ${Boost_LIBRARIES}
-        lib_helloworld
+        ip_filter_li
         )
 
-target_link_libraries(hw01_helloworld lib_helloworld)
+target_link_libraries(hw03_ip_filter ip_filter_li)
 
-install(TARGETS hw01_helloworld RUNTIME DESTINATION bin)
+install(TARGETS hw03_ip_filter RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 
