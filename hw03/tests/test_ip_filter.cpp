@@ -2,7 +2,7 @@
 // Created by User on 15.03.2018.
 //
 
-#include "ip_filter_li.h"
+#include "../ip_filter_li.h"
 
 #define BOOST_TEST_MODULE test_ip_filter
 
