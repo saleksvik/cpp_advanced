@@ -4,11 +4,6 @@
 
 #include "ip_filter_li.h"
 
-int version()
-{
-    return 0;
-}
-
 std::vector<std::string> split(const std::string &str, char d)
 {
     std::vector<std::string> r;
@@ -35,8 +30,8 @@ bool operator>(const std::string& lhs, const std::string& rhs)
 
 struct greater
 {
-    template <typename T>
-    bool operator()(const T &a, const T &b) const { return a > b; }
+    template<typename T>
+     bool operator()(const T &a, const T &b) const { return a > b; }
 };
 
 bool operator>(const std::vector<std::string> &lvs, const std::vector<std::string> &rvs)

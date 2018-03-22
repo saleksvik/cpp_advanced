@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.2)
+cmake_minimum_required(VERSION 3.8)
 
-project(ipfilter03 VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+project(ip_filter03 VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
 set (HW ./hw03)
 set (TESTS_SOURCES
@@ -47,4 +47,4 @@ include (CPack)
 
 enable_testing()
 
-add_test(test_reversed_sort ${TEST})
+add_test(${TEST} ${TEST})
