@@ -31,7 +31,7 @@ bool operator>(const std::string& lhs, const std::string& rhs)
 struct greater
 {
     template<typename T>
-     bool operator()(const T &a, const T &b) const { return a > b; }
+     bool operator()(const T& a, const T& b) const { return a > b; }
 };
 
 bool operator>(const std::vector<std::string> &lvs, const std::vector<std::string> &rvs)
