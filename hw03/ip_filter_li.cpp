@@ -62,19 +62,12 @@ bool ippredicate(T1& ip, int index, bool op_and_or)
 template <typename T1, typename T2, typename... Args>
 bool ippredicate(T1& ip, int index, bool op_and_or, T2 t, Args... args)
 {
+    auto res = (ip[index] == std::to_string(t));
     if(op_and_or)
-        return ip[index] == std::to_string(t) && ippredicate(ip, ++index, true, args...);
+        return !res ? false : res && ippredicate(ip, ++index, true, args...);
     else
-        return ip[index] == std::to_string(t) || ippredicate(ip, ++index, false, args...);
+        return res ? true : res || ippredicate(ip, ++index, false, args...);
 }
-
-//template <typename T, typename ...Args>
-//auto filter(T& ip_pool, Args...args)-> typename std::remove_reference<decltype(ip_pool)>::type
-//{
-//    typename std::remove_reference<decltype(ip_pool)>::type ip_filt;
-//    std::copy_if(ip_pool.begin(), ip_pool.end(), std::back_inserter(ip_filt), [args...](auto vip){return ippredicate(vip, 0, args...);});
-//    return ip_filt;
-//}
 
 auto filter(std::vector<std::vector<std::string>>& ip_pool, int ip1)-> std::remove_reference<decltype(ip_pool)>::type
 {
@@ -97,11 +90,18 @@ auto filter_any(std::vector<std::vector<std::string>>& ip_pool, int ip1)-> std::
     return ip_filt;
 }
 
-//auto filter_any = [&ip_pool](auto any)
-//{
-//    decltype(ip_pool) ip_filt;
-//    for(auto ip = ip_pool.cbegin(); ip != ip_pool.cend(); ++ip)
-//        if(std::stoi((*ip)[0]) == any || std::stoi((*ip)[1]) == any || std::stoi((*ip)[2]) == any || std::stoi((*ip)[3])== any)
-//            ip_filt.push_back(*ip);
-//    return ip_filt;
-//};
+void print_ips_vector(const std::vector<std::vector<std::string>> &ip_pool)
+{
+    for(auto ip = ip_pool.cbegin(); ip != ip_pool.cend(); ++ip)
+    {
+        for(auto ip_part = ip->cbegin(); ip_part != ip->cend(); ++ip_part)
+        {
+            if (ip_part != ip->cbegin())
+            {
+                std::cout << ".";
+            }
+            std::cout << *ip_part;
+        }
+        std::cout << std::endl;
+    }
+}

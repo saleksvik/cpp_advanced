@@ -15,7 +15,7 @@ add_library(ip_filter_li ${HW}/ip_filter_li.cpp)
 set (TEST test_ip_filter)
 add_executable (${TEST} ${TESTS_SOURCES})
 
-set_target_properties(hw03_ip_filter PROPERTIES
+set_target_properties(hw03_ip_filter ${TEST} PROPERTIES
         CXX_STANDARD 14
         CXX_STANDARD_REQUIRED ON
         COMPILE_OPTIONS -Wpedantic -Wall -Wextra
@@ -44,4 +44,4 @@ include (CPack)
 
 enable_testing()
 
-add_test(test_reversed_sort ${TEST})
+add_test(${TEST} ${TEST})

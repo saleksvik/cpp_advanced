@@ -1,6 +1,8 @@
 //#include <fstream>
 #include "ip_filter_li.h"
 
+#include <fstream>
+
 // ("",  '.') -> [""]
 // ("11", '.') -> ["11"]
 // ("..", '.') -> ["", "", ""]
@@ -14,14 +16,7 @@ int main(int argc, char const *argv[])
 {
     try
     {
-//        std::fstream ifs("./ip_filter.tsv", std::ifstream::in);
-//        if(!ifs.is_open())
-//        {
-//            std::cout << "File not opened" << "\n";
-//            return -1;
-//        }
         std::vector<std::vector<std::string> > ip_pool;
-//        for(std::string line; std::getline(ifs, line);)
         for(std::string line; std::getline(std::cin, line);)
         {
             std::vector<std::string> v = split(line, '\t');
@@ -41,18 +36,16 @@ int main(int argc, char const *argv[])
         // 1.1.234.8
 
         // TODO filter by first byte and output
-//        auto ip_filt1 = filter<std::vector<std::vector<std::string>>>(ip_pool, 1);
         auto ip_filt1 = filter(ip_pool, 1);
         print_ips_vector(ip_filt1);
 
-         // 1.231.69.33
+        // 1.231.69.33
         // 1.87.203.225
         // 1.70.44.170
         // 1.29.168.152
         // 1.1.234.8
 
         // TODO filter by first and second bytes and output
-//        auto ip_filt2 = filter<std::vector<std::vector<std::string>>>(ip_pool, 46, 70);
         auto ip_filt2 = filter(ip_pool, 46, 70);
         print_ips_vector(ip_filt2);
 
@@ -106,19 +99,4 @@ int main(int argc, char const *argv[])
     }
 
     return 0;
-}
-
-void print_ips_vector(const std::vector<std::vector<std::string>> &ip_pool) {
-    for(auto ip = ip_pool.cbegin(); ip != ip_pool.cend(); ++ip)
-        {
-            for(auto ip_part = ip->cbegin(); ip_part != ip->cend(); ++ip_part)
-            {
-                if (ip_part != ip->cbegin())
-                {
-                    std::cout << ".";
-                }
-                std::cout << *ip_part;
-            }
-            std::cout << std::endl;
-        }
 }
