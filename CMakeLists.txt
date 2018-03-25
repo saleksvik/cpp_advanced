@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.2)
 
-project(ip_filter03 VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+project(ip_filter VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
 set (HW ./hw03)
 set (TESTS_SOURCES
@@ -15,7 +15,7 @@ add_library(ip_filter_li ${HW}/ip_filter_li.cpp)
 set (TEST test_ip_filter)
 add_executable (${TEST} ${TESTS_SOURCES})
 
-set_target_properties(hw03_ip_filter  ${TEST} PROPERTIES
+set_target_properties(hw03_ip_filter ${TEST} PROPERTIES
         CXX_STANDARD 14
         CXX_STANDARD_REQUIRED ON
         COMPILE_OPTIONS -Wpedantic -Wall -Wextra
@@ -26,12 +26,9 @@ set_target_properties(${TEST} PROPERTIES
         INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
        )
 
-target_link_libraries(${TEST}
-        ${Boost_LIBRARIES}
-        ip_filter_li
-        )
-
 target_link_libraries(hw03_ip_filter ip_filter_li)
+
+target_link_libraries(${TEST} ip_filter_li ${Boost_LIBRARIES})
 
 install(TARGETS hw03_ip_filter RUNTIME DESTINATION bin)
 
