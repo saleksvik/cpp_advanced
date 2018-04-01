@@ -10,16 +10,16 @@
 // (".11", '.') -> ["", "11"]
 // ("11.22", '.') -> ["11", "22"]
 
-void print_ips_vector(const std::vector<std::vector<std::string>> &ip_pool);
+void print_ips_vector(const ip_list<ip_t>& ip_pool);
 
 int main(int argc, char const *argv[])
 {
     try
     {
-        std::vector<std::vector<std::string> > ip_pool;
+        ip_list<ip_t> ip_pool;
         for(std::string line; std::getline(std::cin, line);)
         {
-            std::vector<std::string> v = split(line, '\t');
+            ip_t v = split(line, '\t');
             ip_pool.push_back(split(v.at(0), '.'));
         }
 

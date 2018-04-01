@@ -4,9 +4,9 @@
 
 #include "ip_filter_li.h"
 
-std::vector<std::string> split(const std::string &str, char d)
+ip_t split(const std::string &str, char d)
 {
-    std::vector<std::string> r;
+    ip_t r;
 
     std::string::size_type start = 0;
     std::string::size_type stop = str.find_first_of(d);
@@ -25,10 +25,10 @@ std::vector<std::string> split(const std::string &str, char d)
 
 bool operator>(const std::string& lhs, const std::string& rhs)
 {
-    return  lhs.length() == rhs.length() ? !(lhs <= rhs) : lhs.length() > rhs.length();
+    return  std::stoi(lhs) > std::stoi(rhs);
 }
 
-bool operator>(const std::vector<std::string> &lvs, const std::vector<std::string> &rvs)
+bool operator>(const ip_t &lvs, const ip_t &rvs)
 {
     for(int i = 0; i < lvs.size(); ++i)
     {
@@ -45,9 +45,9 @@ struct greater
     bool operator()(const T& a, const T& b) const { return a > b; }
 };
 
-void reversed_sort(std::vector<std::vector<std::string>>& ip_pool)
+void reversed_sort(ip_list<ip_t >& ip_pool)
 {
-    std::sort(ip_pool.begin(), ip_pool.end(), greater<std::vector<std::string>>());
+    std::sort(ip_pool.begin(), ip_pool.end(), greater<ip_t>());
 }
 
 template <typename T1>
@@ -69,28 +69,28 @@ bool ippredicate(T1& ip, int index, bool op_and_or, T2 t, Args... args)
         return res ? true : res || ippredicate(ip, ++index, false, args...);
 }
 
-auto filter(std::vector<std::vector<std::string>>& ip_pool, int ip1)-> std::remove_reference<decltype(ip_pool)>::type
+auto filter(ip_list<ip_t>& ip_pool, int ip1)->ip_list<ip_t>
 {
-    std::remove_reference<decltype(ip_pool)>::type ip_filt;
-    std::copy_if(ip_pool.begin(), ip_pool.end(), std::back_inserter(ip_filt), [ip1](auto vip){return ippredicate(vip, 0, true, ip1);});
+    ip_list<ip_t> ip_filt;
+    std::copy_if(std::begin(ip_pool), std::end(ip_pool), std::back_inserter(ip_filt), [ip1](auto vip){return ippredicate(vip, 0, true, ip1);});
     return ip_filt;
 }
 
-auto filter(std::vector<std::vector<std::string>>& ip_pool, int ip1, int ip2)-> std::remove_reference<decltype(ip_pool)>::type
+auto filter(ip_list<ip_t>& ip_pool, int ip1, int ip2)->ip_list<ip_t>
 {
-    std::remove_reference<decltype(ip_pool)>::type ip_filt;
-    std::copy_if(ip_pool.begin(), ip_pool.end(), std::back_inserter(ip_filt), [ip1, ip2](auto vip){return ippredicate(vip, 0, true, ip1, ip2);});
+    ip_list<ip_t> ip_filt;
+    std::copy_if(std::begin(ip_pool), std::end(ip_pool), std::back_inserter(ip_filt), [ip1, ip2](auto vip){return ippredicate(vip, 0, true, ip1, ip2);});
     return ip_filt;
 }
 
-auto filter_any(std::vector<std::vector<std::string>>& ip_pool, int ip1)-> std::remove_reference<decltype(ip_pool)>::type
+auto filter_any(ip_list<ip_t>& ip_pool, int ip1)->ip_list<ip_t>
 {
-    std::remove_reference<decltype(ip_pool)>::type ip_filt;
-    std::copy_if(ip_pool.begin(), ip_pool.end(), std::back_inserter(ip_filt), [ip1](auto vip){return ippredicate(vip, 0, false, ip1, ip1, ip1, ip1);});
+    ip_list<ip_t> ip_filt;
+    std::copy_if(std::begin(ip_pool), std::end(ip_pool), std::back_inserter(ip_filt), [ip1](auto vip){return ippredicate(vip, 0, false, ip1, ip1, ip1, ip1);});
     return ip_filt;
 }
 
-void print_ips_vector(const std::vector<std::vector<std::string>> &ip_pool)
+void print_ips_vector(const ip_list<ip_t>& ip_pool)
 {
     for(auto ip = ip_pool.cbegin(); ip != ip_pool.cend(); ++ip)
     {

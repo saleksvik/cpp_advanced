@@ -12,15 +12,20 @@
 #include <iterator>
 #include <type_traits>
 
-std::vector<std::string> split(const std::string &str, char d);
+template<typename T>
+using ip_list = std::vector<T>;
 
-void reversed_sort(std::vector<std::vector<std::string>>& ip_pool);
+using ip_t = std::vector<std::string>;
+
+ip_t split(const std::string &str, char d);
+
+void reversed_sort(ip_list<ip_t>& ip_pool);
 
 
-auto filter(std::vector<std::vector<std::string>>& ip_pool, int ip1)-> std::remove_reference<decltype(ip_pool)>::type;
-auto filter(std::vector<std::vector<std::string>>& ip_pool, int ip1, int ip2)->std::remove_reference<decltype(ip_pool)>::type;
-auto filter_any(std::vector<std::vector<std::string>>& ip_pool, int ip1)->std::remove_reference<decltype(ip_pool)>::type;
+auto filter(ip_list<ip_t>& ip_pool, int ip1)->ip_list<ip_t>;
+auto filter(ip_list<ip_t>& ip_pool, int ip1, int ip2)->ip_list<ip_t>;
+auto filter_any(ip_list<ip_t>& ip_pool, int ip1)->ip_list<ip_t>;
 
-void print_ips_vector(const std::vector<std::vector<std::string>> &ip_pool);
+void print_ips_vector(const ip_list<ip_t>& ip_pool);
 
 #endif //HW03_IP_FILTER_LIB_H
