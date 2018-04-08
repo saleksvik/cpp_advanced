@@ -86,9 +86,9 @@ BOOST_FIXTURE_TEST_CASE(test_input1, Fixture)
 
     ip_list<ip_t> ip_pool;
 
-    //std::ifstream filein("tst_ip_filter.tsv");
-    //for(std::string line; std::getline(filein, line);)
-    for(std::string line; std::getline(std::cin, line);)
+    std::ifstream filein("tst_ip_filter.tsv");
+    for(std::string line; std::getline(filein, line);)
+    //for(std::string line; std::getline(std::cin, line);)
     {
         auto v = split(line, '\t');
         auto iv_s = split(v.at(0), '.');

@@ -44,4 +44,4 @@ include (CPack)
 
 enable_testing()
 
-add_test(${TEST} "cat ./ip_filter.tsv | " ${TEST})
+add_test(${TEST} ${TEST})
