@@ -1,4 +1,3 @@
-//#include <fstream>
 #include "ip_filter_li.h"
 
 #include <fstream>
@@ -19,8 +18,11 @@ int main(int argc, char const *argv[])
         ip_list<ip_t> ip_pool;
         for(std::string line; std::getline(std::cin, line);)
         {
-            ip_t v = split(line, '\t');
-            ip_pool.push_back(split(v.at(0), '.'));
+            auto v = split(line, '\t');
+            auto iv_s = split(v.at(0), '.');
+            ip_t  iv_t;
+            std::transform(std::begin(iv_s), std::end(iv_s), std::back_inserter(iv_t), [](std::string s){return std::stoi(s);});
+            ip_pool.push_back(iv_t);
         }
 
         // TODO reverse lexicographically sort
