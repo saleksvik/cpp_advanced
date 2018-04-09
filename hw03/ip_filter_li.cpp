@@ -40,7 +40,8 @@ ip_list<ip_t> filter_any(ip_list<ip_t>& ip_pool, int ip1)
     return ip_filt;
 }
 
-void print_ips_vector(const ip_list<ip_t>& ip_pool)
+template <typename T>
+std::ostream& operator<< (std::ostream& ostr, ip_list<T> const& ip_pool)
 {
     for(auto ip = ip_pool.cbegin(); ip != ip_pool.cend(); ++ip)
     {
@@ -48,12 +49,18 @@ void print_ips_vector(const ip_list<ip_t>& ip_pool)
         {
             if (ip_part != ip->cbegin())
             {
-                std::cout << ".";
+                ostr << ".";
             }
-            std::cout << *ip_part;
+            ostr << *ip_part;
         }
-        std::cout << std::endl;
+        ostr << std::endl;
     }
+    return ostr;
+}
+
+void print_ips_vector(const ip_list<ip_t>& ip_pool)
+{
+    std::cout << ip_pool;
 }
 
 ip_s split(const std::string &str, char d)

@@ -24,6 +24,9 @@ ip_list<ip_t> filter(ip_list<ip_t>& ip_pool, int ip1);
 ip_list<ip_t> filter(ip_list<ip_t>& ip_pool, int ip1, int ip2);
 ip_list<ip_t> filter_any(ip_list<ip_t>& ip_pool, int ip1);
 
+template <typename T>
+std::ostream& operator<< (std::ostream& ostr, const ip_list<T>& ip_pool);
+
 void print_ips_vector(const ip_list<ip_t>& ip_pool);
 
 ip_s split(const std::string &str, char d);
