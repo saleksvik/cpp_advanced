@@ -59,6 +59,7 @@ void print_ips_vector(const ip_list<ip_t>& ip_pool)
 ip_s split(const std::string &str, char d)
 {
     ip_s r;
+    r.reserve(4);
     std::string::size_type start = 0;
     std::string::size_type stop = str.find_first_of(d);
     while(stop != std::string::npos)
