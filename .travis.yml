@@ -13,7 +13,9 @@ matrix:
 before_install:
   - eval "${MATRIX_EVAL}"
 before_script:
-  - sudo add-apt-repository ppa:boost-latest/ppa && sudo apt-get update &&  sudo apt-get install libboost-test-dev -y
+  - sudo add-apt-repository ppa:boost-latest/ppa
+  - sudo apt-get update
+  - sudo apt-get install libboost-test-dev -y
 script:
   - cmake .
   - cmake --build .
