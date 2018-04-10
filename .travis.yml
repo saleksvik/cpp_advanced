@@ -1,4 +1,5 @@
 language: cpp
+dist: xenial
 matrix:
   include:
     - os: linux
@@ -13,10 +14,10 @@ matrix:
 before_install:
   - eval "${MATRIX_EVAL}"
 before_script:
-  - echo "deb http://archive.ubuntu.com/ubuntu xenial universe" | sudo tee -a /etc/apt/sources.list
+#  - echo "deb http://archive.ubuntu.com/ubuntu xenial universe" | sudo tee -a /etc/apt/sources.list
   - sudo apt-get update -qq
   - sudo apt-cache search libboost
-  - sudo apt-get install libboost-all-dev -y 
+  - sudo apt-get install libboost-test-dev -y 
 script:
   - cmake .
   - cmake --build .
