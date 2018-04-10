@@ -16,7 +16,7 @@ before_script:
   - echo "deb http://archive.ubuntu.com/ubuntu xenial universe" | sudo tee -a /etc/apt/sources.list
   - sudo apt-get update -qq
   - sudo apt-cache search libboost
-  - sudo apt-get install libboost1.58-dev libboost-test1.58-dev -y 
+  - sudo apt-get install libboost1.58-all-dev libboost-test1.58-dev -y 
 script:
   - cmake .
   - cmake --build .
