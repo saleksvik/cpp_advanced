@@ -13,8 +13,9 @@ matrix:
 before_install:
   - eval "${MATRIX_EVAL}"
 before_script:
-  - echo "deb http://archive.ubuntu.com/ubuntu xenial universe" | sudo tee -a /etc/apt/sources.list
-  - sudo apt-get install libboost-test-dev -y
+  - sudo apt-get update -qq
+  - sudo apt-cache search libboost
+  - sudo apt-get install libboost-test-dev 
 script:
   - cmake .
   - cmake --build .
