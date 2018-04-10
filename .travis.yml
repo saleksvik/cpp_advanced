@@ -1,5 +1,6 @@
-language: cpp
-dist: xenial
+llanguage: cpp
+compiler: gcc
+dist: artful
 matrix:
   include:
     - os: linux
