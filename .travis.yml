@@ -1,5 +1,5 @@
 llanguage: cpp
-compiler: gcc
+compiler: g++
 dist: artful
 matrix:
   include:
@@ -14,12 +14,9 @@ matrix:
         - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
 before_install:
   - eval "${MATRIX_EVAL}"
-install:
-  - sudo apt-get install -qq g++-6
-  - g++ --version
-  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6.5 90
 before_script:
 #  - echo "deb http://archive.ubuntu.com/ubuntu xenial universe" | sudo tee -a /etc/apt/sources.list
+  - g++ --version
   - sudo apt-get update -qq
   - sudo apt-cache search libboost
   - sudo apt-get install libboost-test-dev -y 
