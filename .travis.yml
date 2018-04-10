@@ -1,5 +1,5 @@
 language: cpp
-compiler: gcc
+compiler: g++
 dist: xenial
 matrix:
   include:
@@ -16,9 +16,9 @@ before_install:
   - eval "${MATRIX_EVAL}"
 before_script:
 #  - echo "deb http://archive.ubuntu.com/ubuntu xenial universe" | sudo tee -a /etc/apt/sources.list
-#  - sudo apt-get install -qq g++-6
+  - sudo apt-get install -qq g++-6
   - g++ --version
-#  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
   - sudo apt-cache search libboost
   - sudo apt-get install libboost-test-dev -y 
 script:
