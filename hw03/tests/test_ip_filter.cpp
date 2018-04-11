@@ -9,7 +9,7 @@
 
 #define BOOST_TEST_MODULE test_ip_filter
 
-#include <boost/test/included/unit_test.hpp>
+#include <boost/test/unit_test.hpp>
 
 std::ostream& operator<< (std::ostream& ostr, ip_t const& ip_part)
 {
@@ -27,7 +27,7 @@ std::ostream& operator<< (std::ostream& ostr, ip_t const& ip_part)
 
 namespace boost {
     namespace test_tools {
-        namespace tt_detail{
+        //namespace tt_detail{
             template<>
             struct print_log_value<ip_t> {
                 void operator()( std::ostream& os, ip_t const& ts)
@@ -35,7 +35,7 @@ namespace boost {
                     ::operator<<(os,ts);
                 }
              };
-        }
+        //}
     }
 }
 
