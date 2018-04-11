@@ -14,9 +14,9 @@ matrix:
         - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
 before_install:
   - eval "${MATRIX_EVAL}"
-  - echo "deb http://http://archive.ubuntu.com/ubuntu/dists/xenial/universe/" | sudo tee -a /etc/apt/sources.list
-  - sudo apt-get update -qq
+#  - echo "deb http://http://archive.ubuntu.com/ubuntu/dists/xenial/universe/" | sudo tee -a /etc/apt/sources.list
 before_script:
+  - sudo apt-get update -qq
 #  - sudo apt-get install -qq g++-6
 #  - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 60 --slave /usr/bin/g++ g++ /usr/bin/g++-6  - g++ --version
 #  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
