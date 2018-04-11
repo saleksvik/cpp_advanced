@@ -1,27 +1,16 @@
 language: cpp
-compiler: gcc
+compiler: g++
 dist: xenial
-matrix:
-  include:
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-6
-      env:
-        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
 before_install:
-  - eval "${MATRIX_EVAL}"
-before_script:
-  - echo "deb http://archive.ubuntu.com/ubuntu/dists/xenial/universe" | sudo tee -a /etc/apt/sources.list
+  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
   - sudo apt-get update -qq
-#  - sudo apt-cache search g++
+install:
+ #  - sudo apt-cache search g++
   - sudo apt-get install -qq g++-6
-  - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 60 --slave /usr/bin/g++ g++ /usr/bin/g++-6  
+#  - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 60 --slave /usr/bin/g++ g++ /usr/bin/g++-6  
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
   - g++ --version
-#  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
+before_script:
   - sudo apt-cache search libboost
   - sudo apt-get install libboost-test-dev -y 
 script:
