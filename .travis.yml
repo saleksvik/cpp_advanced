@@ -9,17 +9,17 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
-            - g++-6
+            - g++-7
       env:
-        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
+        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-7"
 before_install:
   - eval "${MATRIX_EVAL}"
 #  - echo "deb http://http://archive.ubuntu.com/ubuntu/dists/xenial/universe/" | sudo tee -a /etc/apt/sources.list
 before_script:
   - sudo apt-get update -qq
-  - sudo apt-get install -qq g++-6
+  - sudo apt-get install -qq g++-7
   - sudo apt-cache search g++
-#  - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 60 --slave /usr/bin/g++ g++ /usr/bin/g++-6  - g++ --version
+  - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 60 --slave /usr/bin/g++ g++ /usr/bin/g++-7  - g++ --version
 #  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
   - sudo apt-cache search libboost
   - sudo apt-get install libboost-test-dev -y 
