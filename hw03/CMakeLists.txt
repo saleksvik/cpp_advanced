@@ -14,7 +14,6 @@ add_library(ip_filter_li ${HW}/ip_filter_li.cpp)
 
 set (TEST test_ip_filter)
 add_executable (${TEST} ${TESTS_SOURCES})
-add_library(boost_unit_test_framework STATIC IMPORTED)
 
 set_target_properties(hw03_ip_filter ${TEST} PROPERTIES
         CXX_STANDARD 14
@@ -23,7 +22,7 @@ set_target_properties(hw03_ip_filter ${TEST} PROPERTIES
         )
 
 set_target_properties(${TEST} PROPERTIES
-#        COMPILE_DEFINITIONS BOOST_TEST_STATIC_LINK
+        COMPILE_DEFINITIONS BOOST_TEST_STATIC_LINK
         INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
        )
 
