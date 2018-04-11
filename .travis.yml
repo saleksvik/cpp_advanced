@@ -1,5 +1,5 @@
 language: cpp
-compiler: g++
+compiler: gcc
 dist: xenial
 matrix:
   include:
@@ -15,9 +15,9 @@ matrix:
 before_install:
   - eval "${MATRIX_EVAL}"
 before_script:
-#  - echo "deb http://http://archive.ubuntu.com/ubuntu/dists/xenial/universe" | sudo tee -a /etc/apt/sources.list
+  - echo "deb http://archive.ubuntu.com/ubuntu/dists/xenial/universe" | sudo tee -a /etc/apt/sources.list
   - sudo apt-get update -qq
-  - sudo apt-cache search g++
+#  - sudo apt-cache search g++
   - sudo apt-get install -qq g++-6
   - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 60 --slave /usr/bin/g++ g++ /usr/bin/g++-6  
   - g++ --version
