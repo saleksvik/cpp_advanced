@@ -27,7 +27,7 @@ std::ostream& operator<< (std::ostream& ostr, ip_t const& ip_part)
 
 namespace boost {
     namespace test_tools {
-        namespace tt_detail{
+//        namespace tt_detail{
             template<>
             struct print_log_value<ip_t> {
                 void operator()( std::ostream& os, ip_t const& ts)
@@ -36,7 +36,7 @@ namespace boost {
                 }
              };
         }
-    }
+//    }
 }
 
 namespace tt = boost::test_tools;
