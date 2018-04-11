@@ -5,13 +5,13 @@ before_install:
   - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
   - sudo apt-get update -qq
 install:
- #  - sudo apt-cache search g++
+#  - sudo apt-cache search g++
   - sudo apt-get install -qq g++-6
 #  - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 60 --slave /usr/bin/g++ g++ /usr/bin/g++-6  
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
-  - g++ --version
+#  - g++ --version
 before_script:
-  - sudo apt-cache search libboost
+#  - sudo apt-cache search libboost
   - sudo apt-get install libboost-test-dev -y 
 script:
   - cmake .
