@@ -9,7 +9,7 @@
 
 #define BOOST_TEST_MODULE test_ip_filter
 
-#include <boost/test/unit_test.hpp>
+#include <boost/test/included/unit_test.hpp>
 
 std::ostream& operator<< (std::ostream& ostr, ip_t const& ip_part)
 {
