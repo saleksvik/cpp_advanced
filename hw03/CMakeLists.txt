@@ -6,7 +6,7 @@ set (HW ./hw03)
 set (TESTS_SOURCES
         ${HW}/tests/test_ip_filter.cpp)
 
-find_package(Boost COMPONENTS unit_test_framework REQUIRED)
+find_package(Boost 1.58.0 COMPONENTS unit_test_framework REQUIRED)
 
 add_executable(hw03_ip_filter ${HW}/ip_filter.cpp)
 

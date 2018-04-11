@@ -35,8 +35,8 @@ namespace boost {
                     ::operator<<(os,ts);
                 }
              };
-        }
-//    }
+//        }
+    }
 }
 
 namespace tt = boost::test_tools;
