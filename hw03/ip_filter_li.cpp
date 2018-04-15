@@ -19,21 +19,21 @@ bool ippredicate(ip_t& ip, bool op_and_or, int t0 = -1, int t1 = -1, int t2 = -1
                || (ip[2] == t2 || t2 == -1) || (ip[3] == t3 || t3 == -1);
 }
 
-ip_list<ip_t> filter(ip_list<ip_t>& ip_pool, int ip1)
+ip_list<ip_t> filter(const ip_list<ip_t>& ip_pool, int ip1)
 {
     ip_list<ip_t> ip_filt;
     std::copy_if(std::begin(ip_pool), std::end(ip_pool), std::back_inserter(ip_filt), [ip1](auto vip){return ippredicate(vip, true, ip1);});
     return ip_filt;
 }
 
-ip_list<ip_t> filter(ip_list<ip_t>& ip_pool, int ip1, int ip2)
+ip_list<ip_t> filter(const ip_list<ip_t>& ip_pool, int ip1, int ip2)
 {
     ip_list<ip_t> ip_filt;
     std::copy_if(std::begin(ip_pool), std::end(ip_pool), std::back_inserter(ip_filt), [ip1, ip2](auto vip){return ippredicate(vip, true, ip1, ip2);});
     return ip_filt;
 }
 
-ip_list<ip_t> filter_any(ip_list<ip_t>& ip_pool, int ip1)
+ip_list<ip_t> filter_any(const ip_list<ip_t>& ip_pool, int ip1)
 {
     ip_list<ip_t> ip_filt;
     std::copy_if(std::begin(ip_pool), std::end(ip_pool), std::back_inserter(ip_filt), [ip1](auto vip){return ippredicate(vip, false, ip1, ip1, ip1, ip1);});
