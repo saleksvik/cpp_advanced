@@ -149,8 +149,8 @@ BOOST_FIXTURE_TEST_CASE(test_input1, Fixture)
 
     //BOOST_CHECK_PREDICATE(validate_ip_list_size, (test_input_ip_pool));
     //BOOST_CHECK_PREDICATE(validate_ip_list_values, (test_input_ip_pool));
-    BOOST_TEST(validate_ip_list_size(test_input_ip_pool));
-    BOOST_TEST(validate_ip_list_values(test_input_ip_pool));
+    BOOST_CHECK(validate_ip_list_size(test_input_ip_pool));
+    BOOST_CHECK(validate_ip_list_values(test_input_ip_pool));
 }
 
 BOOST_FIXTURE_TEST_CASE(test_reversed_sort, Fixture)
