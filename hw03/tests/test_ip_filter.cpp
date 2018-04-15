@@ -29,17 +29,13 @@ std::ostream& operator<< (std::ostream& ostr, ip_t const& ip_part)
 namespace boost {
     namespace test_tools {
         namespace tt_detail{
-//            std::ostream& operator<<(std::ostream& os, ip_t const& ts)
-//            {
-//                return ::operator<<(os, ts);
-//            }
             template<>
             struct print_log_value<ip_t> {
                 void operator()( std::ostream& os, ip_t const& ts)
                 {
                     ::operator<<(os,ts);
                 }
-             };
+            };
         }
     }
 }

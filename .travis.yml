@@ -6,10 +6,10 @@ before_install:
   - sudo apt-get update -qq
 install:
 #  - sudo apt-cache search g++
-  - travis_retry sudo apt-get install -qq g++-6
-#  - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 60 --slave /usr/bin/g++ g++ /usr/bin/g++-6  
-  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
-#  - g++ --version
+  - travis_retry sudo apt-get install -qq g++-7
+#  - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 60 --slave /usr/bin/g++ g++ /usr/bin/g++-7  
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 90
+  - g++ --version
 before_script:
 #  - sudo apt-cache search libboost
   - sudo apt-get install libboost-test-dev -y 
