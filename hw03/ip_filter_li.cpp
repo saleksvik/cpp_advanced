@@ -19,29 +19,28 @@ bool ippredicate(ip_t& ip, bool op_and_or, int t0 = -1, int t1 = -1, int t2 = -1
                || (ip[2] == t2 || t2 == -1) || (ip[3] == t3 || t3 == -1);
 }
 
-ip_list<ip_t> filter(const ip_list<ip_t>& ip_pool, int ip1)
+ip_list<ip_t> filter(ip_list<ip_t>& ip_pool, int ip1)
 {
     ip_list<ip_t> ip_filt;
     std::copy_if(std::begin(ip_pool), std::end(ip_pool), std::back_inserter(ip_filt), [ip1](auto vip){return ippredicate(vip, true, ip1);});
     return ip_filt;
 }
 
-ip_list<ip_t> filter(const ip_list<ip_t>& ip_pool, int ip1, int ip2)
+ip_list<ip_t> filter(ip_list<ip_t>& ip_pool, int ip1, int ip2)
 {
     ip_list<ip_t> ip_filt;
     std::copy_if(std::begin(ip_pool), std::end(ip_pool), std::back_inserter(ip_filt), [ip1, ip2](auto vip){return ippredicate(vip, true, ip1, ip2);});
     return ip_filt;
 }
 
-ip_list<ip_t> filter_any(const ip_list<ip_t>& ip_pool, int ip1)
+ip_list<ip_t> filter_any(ip_list<ip_t>& ip_pool, int ip1)
 {
     ip_list<ip_t> ip_filt;
     std::copy_if(std::begin(ip_pool), std::end(ip_pool), std::back_inserter(ip_filt), [ip1](auto vip){return ippredicate(vip, false, ip1, ip1, ip1, ip1);});
     return ip_filt;
 }
 
-template <typename T>
-std::ostream& operator<< (std::ostream& ostr, ip_list<T> const& ip_pool)
+void print_ips_vector(const ip_list<ip_t>& ip_pool)
 {
     for(auto ip = ip_pool.cbegin(); ip != ip_pool.cend(); ++ip)
     {
@@ -49,18 +48,12 @@ std::ostream& operator<< (std::ostream& ostr, ip_list<T> const& ip_pool)
         {
             if (ip_part != ip->cbegin())
             {
-                ostr << ".";
+                std::cout << ".";
             }
-            ostr << *ip_part;
+            std::cout << *ip_part;
         }
-        ostr << std::endl;
+        std::cout << std::endl;
     }
-    return ostr;
-}
-
-void print_ips_vector(const ip_list<ip_t>& ip_pool)
-{
-    std::cout << ip_pool;
 }
 
 ip_s split(const std::string &str, char d)
