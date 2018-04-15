@@ -10,35 +10,36 @@
 
 #define BOOST_TEST_MODULE test_ip_filter
 
-#include <boost/test/included/unit_test.hpp>
-
-std::ostream& operator<< (std::ostream& ostr, ip_t const& ip_part)
-{
-    for(auto it = std::begin(ip_part); it != std::end(ip_part); ++it)
-    {
-        if (it != std::begin(ip_part))
-        {
-            ostr << ".";
-        }
-        ostr << *it;
-    }
-    ostr << std::endl;
-    return ostr;
-}
-
-namespace boost {
-    namespace test_tools {
-        namespace tt_detail{
-            template<>
-            struct print_log_value<ip_t> {
-                void operator()( std::ostream& os, ip_t const& ts)
-                {
-                    ::operator<<(os,ts);
-                }
-            };
-        }
-    }
-}
+#include <boost/test/unit_test.hpp>
+//#include <boost/test/included/unit_test.hpp>
+//
+//std::ostream& operator<< (std::ostream& ostr, ip_t const& ip_part)
+//{
+//    for(auto it = std::begin(ip_part); it != std::end(ip_part); ++it)
+//    {
+//        if (it != std::begin(ip_part))
+//        {
+//            ostr << ".";
+//        }
+//        ostr << *it;
+//    }
+//    ostr << std::endl;
+//    return ostr;
+//}
+//
+//namespace boost {
+//    namespace test_tools {
+//        namespace tt_detail{
+//            template<>
+//            struct print_log_value<ip_t> {
+//                void operator()( std::ostream& os, ip_t const& ts)
+//                {
+//                    ::operator<<(os,ts);
+//                }
+//            };
+//        }
+//    }
+//}
 
 namespace tt = boost::test_tools;
 
