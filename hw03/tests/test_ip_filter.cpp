@@ -8,52 +8,50 @@
 //#include <fstream>
 #include <sstream>
 
+std::ostream& operator<< (std::ostream& ostr, ip_t const& ip_part)
+{
+    for(auto it = std::begin(ip_part); it != std::end(ip_part); ++it)
+    {
+        if (it != std::begin(ip_part))
+        {
+            ostr << ".";
+        }
+        ostr << *it;
+    }
+    ostr << std::endl;
+    return ostr;
+}
+
 #define BOOST_TEST_MODULE test_ip_filter
 
-//#include <boost/test/unit_test.hpp>
-#include <boost/test/included/unit_test.hpp>
+#include <boost/test/unit_test.hpp>
+//#include <boost/test/included/unit_test.hpp>
 
-//std::ostream& operator<< (std::ostream& ostr, ip_t const& ip_part)
-//{
-//    for(auto it = std::begin(ip_part); it != std::end(ip_part); ++it)
-//    {
-//        if (it != std::begin(ip_part))
-//        {
-//            ostr << ".";
-//        }
-//        ostr << *it;
-//    }
-//    ostr << std::endl;
-//    return ostr;
-//}
-//
-//namespace boost {
-//    namespace test_tools {
-//        namespace tt_detail{
-//            template<>
-//            struct print_log_value<ip_t> {
-//                void operator()( std::ostream& os, ip_t const& ts)
-//                {
-//                    ::operator<<(os,ts);
-//                }
-//            };
-//        }
-//    }
-//}
+namespace boost {
+    std::ostream& operator<< (std::ostream& ostr, ip_t const& ip_part)
+    {
+        return ::operator<<(ostr,ip_part);
+    }
+   namespace test_tools {
+       //namespace tt_detail {
+               template<>
+               struct print_log_value<ip_list<ip_t>> {
+                   void operator()(std::ostream &os, ip_list<ip_t> const &ts) {
+                       ::operator<<(os, ts);
+                   }
+               };
+       //}
+    }
+}
 
 namespace tt = boost::test_tools;
 
-BOOST_AUTO_TEST_SUITE(test_suite_ip_filter)
-
 tt::predicate_result validate_ip_list_size(const ip_list<ip_t>& ip_pool)
 {
-    //boost::test_tools::predicate_result res(false);
     for (auto ipv : ip_pool)
     {
         if(ipv.size() != 4)
         {
-            //res.message() << "Size of ip-vector " << ipv.size() << "!=" << " 4";
-            //return res;
             return false;
         }
     }
@@ -62,21 +60,20 @@ tt::predicate_result validate_ip_list_size(const ip_list<ip_t>& ip_pool)
 
 tt::predicate_result validate_ip_list_values(const ip_list<ip_t>& ip_pool)
 {
-    //boost::test_tools::predicate_result res(false);
     for (auto ipv : ip_pool)
     {
         for(auto ip_octet : ipv)
         {
             if(ip_octet < 0)
-                //return res;
                 return false;
             if(ip_octet > 255)
-                //return res;
                 return false;
         };
     }
     return true;
 }
+
+BOOST_AUTO_TEST_SUITE(test_suite_ip_filter)
 
 struct Fixture
 {
@@ -110,7 +107,7 @@ struct Fixture
 
         try
         {
-            //std::ifstream filein("./tst_ip_filter.tsv");
+//            std::ifstream filein("./tst_ip_filter.tsv");
             std::istringstream iss("113.162.145.156\t111\t0\n"
                                    "157.39.22.224\t5\t6\n"
                                    "79.180.73.190\t2\t1\n"
@@ -118,6 +115,7 @@ struct Fixture
                                    "219.102.120.135\t486\t0\n"
                                    "67.232.81.208\t1\t0\n");
             for(std::string line; std::getline(iss, line);) {
+//            for(std::string line; std::getline(filein, line);) {
                 auto v = split(line, '\t');
                 auto iv_s = split(v.at(0), '.');
                 ip_t iv_t;
@@ -135,8 +133,6 @@ struct Fixture
 
     ~Fixture()
     {
-        //test_ip_pool.clear();
-        //test_input_ip_pool.clear();
     }
 
     // Тестовый объект
@@ -146,11 +142,10 @@ struct Fixture
 
 BOOST_FIXTURE_TEST_CASE(test_input1, Fixture)
 {
-
-    //BOOST_CHECK_PREDICATE(validate_ip_list_size, (test_input_ip_pool));
-    //BOOST_CHECK_PREDICATE(validate_ip_list_values, (test_input_ip_pool));
-    BOOST_CHECK(validate_ip_list_size(test_input_ip_pool));
-    BOOST_CHECK(validate_ip_list_values(test_input_ip_pool));
+    BOOST_CHECK_PREDICATE(validate_ip_list_size, (test_input_ip_pool));
+    BOOST_CHECK_PREDICATE(validate_ip_list_values, (test_input_ip_pool));
+//    BOOST_CHECK(validate_ip_list_size(test_input_ip_pool));
+//    BOOST_CHECK(validate_ip_list_values(test_input_ip_pool));
 }
 
 BOOST_FIXTURE_TEST_CASE(test_reversed_sort, Fixture)
