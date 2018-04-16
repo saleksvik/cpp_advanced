@@ -8,31 +8,30 @@
 //#include <fstream>
 #include <sstream>
 
-std::ostream& operator<< (std::ostream& ostr, ip_t const& ip_part)
-{
-    for(auto it = std::begin(ip_part); it != std::end(ip_part); ++it)
-    {
-        if (it != std::begin(ip_part))
-        {
-            ostr << ".";
-        }
-        ostr << *it;
-    }
-    ostr << std::endl;
-    return ostr;
-}
-
 #define BOOST_TEST_MODULE test_ip_filter
 
 #include <boost/test/unit_test.hpp>
-//#include <boost/test/included/unit_test.hpp>
 
 namespace boost {
+//    std::ostream& operator<< (std::ostream& ostr, ip_t const& ip_part)
+//    {
+//        return ::operator<<(ostr,ip_part);
+//    }
     std::ostream& operator<< (std::ostream& ostr, ip_t const& ip_part)
     {
-        return ::operator<<(ostr,ip_part);
+        for(auto it = std::begin(ip_part); it != std::end(ip_part); ++it)
+        {
+            if (it != std::begin(ip_part))
+            {
+                ostr << ".";
+            }
+            ostr << *it;
+        }
+        ostr << std::endl;
+        return ostr;
     }
-   namespace test_tools {
+
+    namespace test_tools {
        //namespace tt_detail {
                template<>
                struct print_log_value<ip_list<ip_t>> {
@@ -144,8 +143,6 @@ BOOST_FIXTURE_TEST_CASE(test_input1, Fixture)
 {
     BOOST_CHECK_PREDICATE(validate_ip_list_size, (test_input_ip_pool));
     BOOST_CHECK_PREDICATE(validate_ip_list_values, (test_input_ip_pool));
-//    BOOST_CHECK(validate_ip_list_size(test_input_ip_pool));
-//    BOOST_CHECK(validate_ip_list_values(test_input_ip_pool));
 }
 
 BOOST_FIXTURE_TEST_CASE(test_reversed_sort, Fixture)
