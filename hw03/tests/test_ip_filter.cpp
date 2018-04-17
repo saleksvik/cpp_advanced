@@ -13,10 +13,6 @@
 #include <boost/test/unit_test.hpp>
 
 namespace boost {
-//    std::ostream& operator<< (std::ostream& ostr, ip_t const& ip_part)
-//    {
-//        return ::operator<<(ostr,ip_part);
-//    }
     std::ostream& operator<< (std::ostream& ostr, ip_t const& ip_part)
     {
         for(auto it = std::begin(ip_part); it != std::end(ip_part); ++it)
